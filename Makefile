@@ -7,7 +7,7 @@ SDL_LIBS := $(shell sdl2-config --libs)
 CC=g++
 CPPFLAGS+=-g $(SDL_CFLAGS) -I$(INCLUDE) -I$(LOCAL_INCLUDE) -I$(LIB_DIR) -I$(LOCAL_LIB_DIR)
 #CPPFLAGS+=-g -O2 -I$(DIR) -I$(LUA_INC) -L$(LUA_LIB)
-TARGET = ExclusionEngine
+TARGET = LudumPrep
 
 UNIX_LIBS=-lSDL2 -lGL -lGLEW -llua
 MAC_LIBS=-framework OpenGL $(SDL_LIBS)
