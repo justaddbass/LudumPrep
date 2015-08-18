@@ -35,9 +35,9 @@ Window::Window(const char* title, int width, int height)
 		fprintf(stderr, "Error: %s\n", glewGetErrorString(err));
 		exit(1);
 	}
-	else		
+	else
 		printf("%s\n", glGetString(GL_VERSION));
-#else	
+#else
 	printf("%s\n", glGetString(GL_VERSION));
 #endif
 
@@ -45,7 +45,7 @@ Window::Window(const char* title, int width, int height)
 	//glClearColor(0,0,1,1);
 	//SwapBuffers();
 	//glClear(GL_COLOR_BUFFER_BIT);
-	SDL_Delay(2000);
+	//SDL_Delay(2000);
 }
 
 Window::~Window()
@@ -58,6 +58,7 @@ Window::~Window()
 void Window::SwapBuffers()
 {
 	SDL_GL_SwapWindow(_window);
+	SDL_Delay(2000);
 }
 
 /*void Window::Update()
