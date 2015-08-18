@@ -1,13 +1,16 @@
 INCLUDE=/usr/include/
-#BULLET_INC=/usr/include/bullet
+LOCAL_INCLUDE=/usr/local/include/
 LIB_DIR=/usr/lib/
+LOCAL_LIB_DIR=/usr/local/lib/
+SDL_CFLAGS := $(shell sdl2-config --cflags)
+SDL_LIBS := $(shell sdl2-config --libs)
 CC=g++
-CPPFLAGS+=-g -I$(INCLUDE) -I$(LIB_DIR) -I$(BULLET_INC)
+CPPFLAGS+=-g $(SDL_CFLAGS) -I$(INCLUDE) -I$(LOCAL_INCLUDE) -I$(LIB_DIR) -I$(LOCAL_LIB_DIR)
 #CPPFLAGS+=-g -O2 -I$(DIR) -I$(LUA_INC) -L$(LUA_LIB)
 TARGET = ExclusionEngine
 
 UNIX_LIBS=-lSDL2 -lGL -lGLEW -llua
-MAC_LIBS=-framework OpenGL -framework SDL2 -llua
+MAC_LIBS=-framework OpenGL $(SDL_LIBS)
 
 OBJ := $(patsubst %.cpp,%.o,$(wildcard src/*.cpp))
 OS := $(shell uname -s)
