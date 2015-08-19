@@ -8,9 +8,11 @@ Renderer::Renderer() {
 
 void Renderer::RenderSquare(float x, float y, float width, float height) {
     static const GLfloat vertex_data[] = {
-       -1.0f, -1.0f, 0.0f,
-       1.0f, -1.0f, 0.0f,
-       0.0f,  1.0f, 0.0f,
+        //0.0f, 0.0f, 0.0f,
+        x-(width/2), y+(height/2), 0.0f,
+        x-(width/2), y-(height/2), 0.0f,
+        x+(width/2), y+(height/2), 0.0f,
+        x+(width/2), y-(height/2), 0.0f,
     };
 
     GLuint vao, vertex_buffer, color_buffer;
@@ -25,7 +27,7 @@ void Renderer::RenderSquare(float x, float y, float width, float height) {
     glEnableVertexAttribArray(0);
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, (void*)0);
 
-    glDrawArrays(GL_TRIANGLES, 0, 3);
+    glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
 
     glDisableVertexAttribArray(0);
 }

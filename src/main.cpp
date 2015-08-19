@@ -7,10 +7,11 @@ int main(int, char**) {
     printf("hello world\n");
     printf("%d\n", CLAMP(5, 0, 1));
 
-    Window window("test", 800, 600);
+    Window* w = new Window("test", 800, 600);
     Renderer r;
-    r.RenderSquare(0,0,0,0);
-    window.SwapBuffers();
-
+    w->ClearScreen();
+    r.RenderSquare(0,0,0.5,0.75);
+    w->SwapBuffers();
+    delete w;
     return 0;
 }

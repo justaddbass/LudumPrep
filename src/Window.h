@@ -18,6 +18,7 @@ public:
 	~Window();
 
 	void SwapBuffers();
+	void ClearScreen();
 	//void Update();
 	void SetFullscreen();
 	//void BindAsRenderTarget() const;
