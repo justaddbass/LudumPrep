@@ -20,7 +20,7 @@ public:
     Renderer();
     ~Renderer() {}
     void RenderSquare(float x, float y, float width, float height);
-    void UpdateMatrices();
+    void UpdateMatrices(float x, float y);
 private:
     GLuint view_model_matrix_handle, program;
     glm::vec3 position, direction, up;

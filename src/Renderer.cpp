@@ -11,10 +11,10 @@ Renderer::Renderer() {
 void Renderer::RenderSquare(float x, float y, float width, float height) {
     static const GLfloat vertex_data[] = {
         //0.0f, 0.0f, 0.0f,
-        x-(width/2), y+(height/2), 0.0f,
-        x-(width/2), y-(height/2), 0.0f,
-        x+(width/2), y+(height/2), 0.0f,
-        x+(width/2), y-(height/2), 0.0f,
+        -0.5, 0.5, 0.0f,
+        -0.5, -0.5, 0.0f,
+        0.5, 0.5, 0.0f,
+        0.5, -0.5, 0.0f,
     };
 
     GLuint vao, vertex_buffer, color_buffer;
@@ -29,21 +29,21 @@ void Renderer::RenderSquare(float x, float y, float width, float height) {
     glEnableVertexAttribArray(0);
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, (void*)0);
 
-    UpdateMatrices();
+    UpdateMatrices(x, y);
     glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
 
     glDisableVertexAttribArray(0);
 }
 
-void Renderer::UpdateMatrices() {
-    position = glm::vec3(0.5, 0.0, 0.0);
+void Renderer::UpdateMatrices(float x, float y) {
+    position = glm::vec3(0.0, 0.0, 1.0);
     up = glm::vec3(0.0, 1.0, 0.0);
     direction = glm::vec3(0.0, 0.0, -1.0);
 
     view_matrix = glm::lookAt(position, position + direction, up);
-    glm::mat4 model_matrix = glm::translate(glm::mat4(1.0f), glm::vec3(0.5, 0.0, 0.0));
+    glm::mat4 model_matrix = glm::translate(glm::mat4(1.0f), glm::vec3(x, y, 0.0));
 
     view_model_matrix = view_matrix * model_matrix;
-    view_model_matrix = glm::mat4(1.0);
+    //view_model_matrix = glm::mat4(1.0);
     glUniformMatrix4fv(view_model_matrix_handle, 1, GL_FALSE, &view_model_matrix[0][0]);
 }
