@@ -10,12 +10,14 @@ SDL_Event e;
 bool isRunning;
 double deltaTime, currentTime, lastTime;
 const double FPS = 1.0/60.0;
+const Uint8* keyState;
 
 float x = 0.0, y = 0.0;
 
 void GameStart() {
     isRunning = true;
     lastTime = SDL_GetTicks();
+    keyState = SDL_GetKeyboardState(NULL);
 
     while(isRunning) {
         currentTime = SDL_GetTicks();
@@ -32,16 +34,19 @@ void GameStart() {
         }
 
         // Retrieve user input
-        const Uint8* inputState = SDL_GetKeyboardState(NULL);
+        SDL_PumpEvents();
 
-        if (inputState[SDL_SCANCODE_A])
+        if (keyState[SDL_SCANCODE_A])
             x -= 0.0001 * deltaTime;
-        if (inputState[SDL_SCANCODE_D])
+        if (keyState[SDL_SCANCODE_D])
             x += 0.0001 * deltaTime;
-        if (inputState[SDL_SCANCODE_W])
+        if (keyState[SDL_SCANCODE_W])
             y += 0.0001 * deltaTime;
-        if (inputState[SDL_SCANCODE_S])
+        if (keyState[SDL_SCANCODE_S])
             y -= 0.0001 * deltaTime;
+
+        if (keyState[SDL_SCANCODE_ESCAPE])
+            isRunning = false;
 
         // Update entity positions, do physics, etc here
         

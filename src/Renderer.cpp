@@ -10,11 +10,10 @@ Renderer::Renderer() {
 
 void Renderer::RenderSquare(float x, float y, float width, float height) {
     static const GLfloat vertex_data[] = {
-        //0.0f, 0.0f, 0.0f,
-        -0.5, 0.5, 0.0f,
-        -0.5, -0.5, 0.0f,
-        0.5, 0.5, 0.0f,
-        0.5, -0.5, 0.0f,
+        -0.5, 0.5,
+        -0.5, -0.5,
+        0.5, -0.5,
+        0.5, 0.5
     };
 
     GLuint vao, vertex_buffer, color_buffer;
@@ -27,10 +26,12 @@ void Renderer::RenderSquare(float x, float y, float width, float height) {
     glBufferData(GL_ARRAY_BUFFER, sizeof(vertex_data), vertex_data, GL_STATIC_DRAW);
 
     glEnableVertexAttribArray(0);
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, (void*)0);
+    glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 0, (void*)0);
 
     UpdateMatrices(x, y);
-    glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
+    // glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
+    glLineWidth(2.0f);
+    glDrawArrays(GL_LINE_LOOP, 0, 4);
 
     glDisableVertexAttribArray(0);
 }
