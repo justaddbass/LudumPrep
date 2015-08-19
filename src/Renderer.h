@@ -20,11 +20,11 @@ public:
     Renderer();
     ~Renderer() {}
     void RenderSquare(float x, float y, float width, float height);
-    void RenderScene();
+    void UpdateMatrices();
 private:
-    GLuint view_matrix_handle, model_matrix_handle, program;
+    GLuint view_model_matrix_handle, program;
     glm::vec3 position, direction, up;
-    glm::mat4 view_matrix;
+    glm::mat4 view_matrix, view_model_matrix;
 };
 
 #endif
