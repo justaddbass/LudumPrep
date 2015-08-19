@@ -8,26 +8,19 @@ Window* w;
 Renderer* r;
 SDL_Event e;
 bool isRunning;
-double deltaTime, currentTime;
-double lastTime = SDL_GetTicks();
-const double FPS = 1/60;
-bool keys[4] = {false};
+double deltaTime, currentTime, lastTime;
+const double FPS = 1.0/60.0;
 
-float x = 0, y = 0;
+float x = 0.0, y = 0.0;
 
-enum {
-    W,
-    A,
-    S,
-    D
-};
-
-void GameLoop() {
-    currentTime = SDL_GetTicks();
-    deltaTime = currentTime - lastTime;
-    lastTime = currentTime;
+void GameStart() {
+    isRunning = true;
+    lastTime = SDL_GetTicks();
 
     while(isRunning) {
+        currentTime = SDL_GetTicks();
+        deltaTime = currentTime - lastTime;
+        lastTime = currentTime;
 
         //TODO: generate set of pressed keys
         while(SDL_PollEvent(&e)) {
@@ -35,54 +28,24 @@ void GameLoop() {
                 case SDL_QUIT:
                     isRunning = false;
                     break;
-                case SDL_KEYDOWN:
-                    //keyboard button pressed
-                    switch(e.key.keysym.sym) {
-                        case SDLK_w:
-                            keys[W] = true;
-                            break;
-                        case SDLK_a:
-                            keys[A] = true;
-                            break;
-                        case SDLK_s:
-                            keys[S] = true;
-                            break;
-                        case SDLK_d:
-                            keys[D] = true;
-                            break;
-                    }
-                    break;
-                case SDL_KEYUP:
-                    //keyboard button released
-                    switch(e.key.keysym.sym) {
-                        case SDLK_w:
-                            keys[W] = false;
-                            break;
-                        case SDLK_a:
-                            keys[A] = false;
-                            break;
-                        case SDLK_s:
-                            keys[S] = false;
-                            break;
-                        case SDLK_d:
-                            keys[D] = false;
-                            break;
-                    }
-                    break;
             }
         }
 
-        w->ClearScreen();
+        // Retrieve user input
+        const Uint8* inputState = SDL_GetKeyboardState(NULL);
 
-        //update entity positions, do physics, etc here
-        if(keys[W])
-            y += 0.0001 * deltaTime;
-        if(keys[A])
+        if (inputState[SDL_SCANCODE_A])
             x -= 0.0001 * deltaTime;
-        if(keys[S])
-            y -= 0.0001 * deltaTime;
-        if(keys[D])
+        if (inputState[SDL_SCANCODE_D])
             x += 0.0001 * deltaTime;
+        if (inputState[SDL_SCANCODE_W])
+            y += 0.0001 * deltaTime;
+        if (inputState[SDL_SCANCODE_S])
+            y -= 0.0001 * deltaTime;
+
+        // Update entity positions, do physics, etc here
+        
+        w->ClearScreen();
 
         //rendering here
         r->RenderSquare(x, y, 0.5, 0.5);
@@ -96,10 +59,10 @@ void GameLoop() {
 
 int main(int, char**) {
 
-    w = new Window("test", 800, 600);
+    w = new Window("Geometry", 800, 600);
     r = new Renderer();
-    isRunning = true;
-    GameLoop();
+
+    GameStart();
 
     delete w;
     delete r;
