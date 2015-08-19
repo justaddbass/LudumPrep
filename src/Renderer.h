@@ -7,6 +7,7 @@
     #include <GL/glew.h>
 #endif
 #include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
 
 #define CLAMP(A, LOWER, UPPER) (A > LOWER && A < UPPER) ? (A) : (A < LOWER ? (LOWER) : (UPPER))
 
@@ -19,8 +20,10 @@ public:
     Renderer();
     ~Renderer() {}
     void RenderSquare(float x, float y, float width, float height);
+    void RenderScene();
 private:
-    GLuint view_matrix_handle, program;
+    GLuint view_matrix_handle, model_matrix_handle, program;
+    glm::vec3 position, direction, up;
     glm::mat4 view_matrix;
 };
 

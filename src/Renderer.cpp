@@ -4,6 +4,8 @@
 Renderer::Renderer() {
     program = LoadShaders("res/vshader.vs", "res/fshader.fs");
     glUseProgram(program);
+    view_matrix_handle = glGetUniformLocation(program, "V");
+    model_matrix_handle = glGetUniformLocation(program, "M");
 }
 
 void Renderer::RenderSquare(float x, float y, float width, float height) {
@@ -28,4 +30,18 @@ void Renderer::RenderSquare(float x, float y, float width, float height) {
     glDrawArrays(GL_TRIANGLES, 0, 3);
 
     glDisableVertexAttribArray(0);
+}
+
+void Renderer::RenderScene() {
+    glUniformMatrix4fv(view_matrix_handle, 1, GL_FALSE, &view_matrix[0][0]);
+    // glUniformMatrix4fv(projectionID, 1, GL_FALSE, &projection_matrix[0][0]);
+    
+    position = glm::vec3(0.0, 0.0, -50.0);
+    up = glm::vec3(0.0, 1.0, 0.0);
+    direction = glm::vec3(0.0, 0.0, 1.0);
+
+    view_matrix = glm::lookAt(position, position + direction, up);
+    glm::mat4 model_matrix = glm::translate(glm::mat4(1.0f), glm::vec3(0.0, 0.0, 0.0));
+    glUniformMatrix4fv(model_matrix_handle, 1, GL_FALSE, &model_matrix[0][0]);
+    
 }

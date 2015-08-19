@@ -9,7 +9,8 @@ int main(int, char**) {
 
     Window window("test", 800, 600);
     Renderer r;
-    r.RenderSquare(0,0,0,0);
+    // r.RenderSquare(0,0,0,0);
+    r.RenderScene();
     window.SwapBuffers();
 
     return 0;
