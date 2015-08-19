@@ -62,7 +62,7 @@ void Window::ClearScreen() {
 void Window::SwapBuffers()
 {
 	SDL_GL_SwapWindow(_window);
-	SDL_Delay(2000);
+	//SDL_Delay(2000);
 }
 
 /*void Window::Update()
