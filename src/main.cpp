@@ -11,6 +11,7 @@ int main(int, char**) {
     Renderer r;
     w->ClearScreen();
     r.RenderSquare(0,0,0.5,0.75);
+    //r.RenderScene();
     w->SwapBuffers();
     delete w;
     return 0;
