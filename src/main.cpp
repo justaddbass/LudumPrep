@@ -3,6 +3,7 @@
 #include <vector>
 #include "Renderer.h"
 #include "Window.h"
+#include "Entity.h"
 
 Window* w;
 Renderer* r;
@@ -13,6 +14,8 @@ const double FPS = 1.0/60.0;
 const Uint8* keyState;
 
 float x = 0.0, y = 0.0;
+Entity* ent1;
+Entity* ent2;
 
 void GameStart() {
     isRunning = true;
@@ -34,26 +37,26 @@ void GameStart() {
         }
 
         // Retrieve user input
-        SDL_PumpEvents();
+        //SDL_PumpEvents();
 
         if (keyState[SDL_SCANCODE_A])
-            x -= 0.0001 * deltaTime;
+            ent1->translate((-0.001 * deltaTime), 0);
         if (keyState[SDL_SCANCODE_D])
-            x += 0.0001 * deltaTime;
+            ent1->translate(0.001 * deltaTime, 0);
         if (keyState[SDL_SCANCODE_W])
-            y += 0.0001 * deltaTime;
+            ent1->translate(0, 0.001 * deltaTime);
         if (keyState[SDL_SCANCODE_S])
-            y -= 0.0001 * deltaTime;
+            ent1->translate(0, -(0.001 * deltaTime));
 
         if (keyState[SDL_SCANCODE_ESCAPE])
             isRunning = false;
 
         // Update entity positions, do physics, etc here
-        
+
         w->ClearScreen();
 
         //rendering here
-        r->RenderSquare(x, y, 0.5, 0.5);
+        r->render();
 
         w->SwapBuffers();
 
@@ -66,6 +69,12 @@ int main(int, char**) {
 
     w = new Window("Geometry", 800, 600);
     r = new Renderer();
+    ent1 = new Entity();
+    ent2 = new Entity();
+    r->registerEntity(ent1);
+    r->registerEntity(ent2);
+    r->attachEntity(ent1);
+    ent2->translate(0.5, 0.5);
 
     GameStart();
 
