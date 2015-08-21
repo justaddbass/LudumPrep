@@ -19,7 +19,7 @@ void Renderer::render() {
 }
 
 void Renderer::UpdateMatrices() {
-    position = glm::vec3(0.0, 0.0, 1.0);
+    position = glm::vec3(attached_entity->getX(), attached_entity->getY(), 1.0);
     up = glm::vec3(0.0, 1.0, 0.0);
     direction = glm::vec3(0.0, 0.0, -1.0);
 

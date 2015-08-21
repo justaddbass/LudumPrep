@@ -9,6 +9,9 @@ const float Entity::vertices[] = {
 
 Entity::Entity() {
     model_matrix = glm::mat4(1.0);
+    _vel_x = 0.0;
+    _vel_y = 0.0;
+    _ang_vel = 0.0;
 
     glGenVertexArrays(1, &vao);
     glBindVertexArray(vao);
@@ -22,18 +25,42 @@ Entity::~Entity() {
 
 }
 
-void Entity::update() {
-    model_matrix[3][0] += _vel_x;
-    model_matrix[3][1] += _vel_x;
+void Entity::update(float deltaTime) {
+    translate(_vel_x * deltaTime, _vel_y * deltaTime);
+    rotate(_ang_vel * deltaTime);
+
+    if(_vel_x > THRESHOLD)
+        _vel_x -= THRESHOLD;
+    else if(_vel_x < -THRESHOLD)
+        _vel_x += THRESHOLD;
+    else
+        _vel_x = 0.0;
+    if(_vel_y > THRESHOLD)
+        _vel_y -= THRESHOLD;
+    else if(_vel_y < -THRESHOLD)
+        _vel_y += THRESHOLD;
+    else
+        _vel_y = 0.0;
+    if(_ang_vel > THRESHOLD * 100.0)
+        _ang_vel -= THRESHOLD * 100.0;
+    else if(_ang_vel < -THRESHOLD * 100.0)
+        _ang_vel += THRESHOLD * 100.0;
+    else
+        _ang_vel = 0.0;
 }
 
 void Entity::translate(float x, float y) {
     model_matrix = glm::translate(model_matrix, glm::vec3(x ,y ,0));
 }
 
-void Entity::setVelocity(float vel_x, float vel_y) {
+void Entity::rotate(float angle) {
+    model_matrix = glm::rotate(model_matrix, angle, glm::vec3(0, 0, 1));
+}
+
+void Entity::setVelocity(float vel_x, float vel_y, float ang_vel) {
     _vel_x = vel_x;
     _vel_y = vel_y;
+    _ang_vel = ang_vel;
 }
 
 void Entity::render() {

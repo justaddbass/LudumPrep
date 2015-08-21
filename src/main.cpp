@@ -40,18 +40,19 @@ void GameStart() {
         //SDL_PumpEvents();
 
         if (keyState[SDL_SCANCODE_A])
-            ent1->translate((-0.001 * deltaTime), 0);
+            ent1->setVelocity(ent1->getVelX(), ent1->getVelY(), 0.05);
         if (keyState[SDL_SCANCODE_D])
-            ent1->translate(0.001 * deltaTime, 0);
+            ent1->setVelocity(ent1->getVelX(), ent1->getVelY(), -0.05);
         if (keyState[SDL_SCANCODE_W])
-            ent1->translate(0, 0.001 * deltaTime);
+            ent1->setVelocity(ent1->getVelX(), 0.001, ent1->getAngVel());
         if (keyState[SDL_SCANCODE_S])
-            ent1->translate(0, -(0.001 * deltaTime));
+            ent1->setVelocity(ent1->getVelX(), -0.001, ent1->getAngVel());
 
         if (keyState[SDL_SCANCODE_ESCAPE])
             isRunning = false;
 
         // Update entity positions, do physics, etc here
+        ent1->update(deltaTime);
 
         w->ClearScreen();
 
@@ -67,7 +68,7 @@ void GameStart() {
 
 int main(int, char**) {
 
-    w = new Window("Geometry", 800, 600);
+    w = new Window("Geometry", 600, 600);
     r = new Renderer();
     ent1 = new Entity();
     ent2 = new Entity();
