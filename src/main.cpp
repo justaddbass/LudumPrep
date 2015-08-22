@@ -12,6 +12,7 @@ bool isRunning;
 double deltaTime, currentTime, lastTime;
 const double FPS = 1.0/60.0;
 const Uint8* keyState;
+int width, height;
 
 float x = 0.0, y = 0.0;
 Entity* ent1;
@@ -40,9 +41,9 @@ void GameStart() {
         //SDL_PumpEvents();
 
         if (keyState[SDL_SCANCODE_A])
-            ent1->setVelocity(ent1->getVelX(), ent1->getVelY(), 0.05);
+            ent1->setVelocity(ent1->getVelX(), ent1->getVelY(), 0.005);
         if (keyState[SDL_SCANCODE_D])
-            ent1->setVelocity(ent1->getVelX(), ent1->getVelY(), -0.05);
+            ent1->setVelocity(ent1->getVelX(), ent1->getVelY(), -0.005);
         if (keyState[SDL_SCANCODE_W])
             ent1->setVelocity(ent1->getVelX(), 0.001, ent1->getAngVel());
         if (keyState[SDL_SCANCODE_S])
@@ -54,6 +55,7 @@ void GameStart() {
         // Update entity positions, do physics, etc here
         ent1->update(deltaTime);
 
+        glClearColor(0.1, 0.1, 0.1, 1.0);
         w->ClearScreen();
 
         //rendering here
@@ -68,8 +70,12 @@ void GameStart() {
 
 int main(int, char**) {
 
-    w = new Window("Geometry", 600, 600);
-    r = new Renderer();
+    width = 512;
+    height = 512;
+    w = new Window("Geometry", width, height);
+    r = new Renderer(width, height);
+
+    // InvaderEnemy invader = new InvaderEnemy();
     ent1 = new Entity();
     ent2 = new Entity();
     r->registerEntity(ent1);
