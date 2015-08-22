@@ -29,8 +29,9 @@ private:
     const float THRESHOLD = 1.0/100000.0;
     float _vel_x, _vel_y, _ang_vel;
     static const float vertices[];
+    static const float vertex_colors[];
     glm::mat4 model_matrix;
-    GLuint vao, vbo;
+    GLuint vao, vbo, colorBuffer;
 };
 
 #endif
