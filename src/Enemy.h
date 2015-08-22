@@ -28,11 +28,15 @@
 //     }
 // };
 
-class InvaderEnemy: Entity {
+class InvaderEnemy : public Entity {
 public:
     InvaderEnemy();
-    ~InvaderEnemy();
+    ~InvaderEnemy() {}
     void update(float deltaTime);
+    void translate(float x, float y) {}
+    void rotate(float angle) {}
+    void setVelocity(float vel_x, float vel_y, float ang_vel) {}
+    void render() {}
 private:
 	static const float vertices[];
 	static const float vertex_colors[];
