@@ -4,6 +4,7 @@
 #include "Renderer.h"
 #include "Window.h"
 #include "Entity.h"
+#include "Enemy.h"
 
 Window* w;
 Renderer* r;
@@ -15,8 +16,8 @@ const Uint8* keyState;
 int width, height;
 
 float x = 0.0, y = 0.0;
-Entity* ent1;
-Entity* ent2;
+InvaderEnemy* ent1;
+InvaderEnemy* ent2;
 
 void GameStart() {
     isRunning = true;
@@ -75,9 +76,8 @@ int main(int, char**) {
     w = new Window("Geometry", width, height);
     r = new Renderer(width, height);
 
-    // InvaderEnemy invader = new InvaderEnemy();
-    ent1 = new Entity();
-    ent2 = new Entity();
+    ent1 = new InvaderEnemy();
+    ent2 = new InvaderEnemy();
     r->registerEntity(ent1);
     r->registerEntity(ent2);
     r->attachEntity(ent1);
