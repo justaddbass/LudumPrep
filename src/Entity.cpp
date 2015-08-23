@@ -32,10 +32,6 @@ Entity::Entity() {
     glBufferData(GL_ARRAY_BUFFER, sizeof(vertex_colors), vertex_colors, GL_STATIC_DRAW);
 }
 
-Entity::~Entity() {
-
-}
-
 void Entity::translate(float x, float y) {
     model_matrix = glm::translate(model_matrix, glm::vec3(x ,y ,0));
 }

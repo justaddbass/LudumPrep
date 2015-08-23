@@ -1,7 +1,7 @@
 #include "Enemy.h"
 
 const float InvaderEnemy::vertices[] = {
-    -0.1, 0.25,
+    -0.1, 0.1,
     -0.1, -0.1,
     0.1, 0.1,
     0.1, -0.1
