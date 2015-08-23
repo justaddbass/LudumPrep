@@ -23,7 +23,9 @@ This is a rough clone of Geometry Wars.
 | Name     | Color   | Shape    | Behavior                                    |
 |----------|---------|----------|---------------------------------------------|
 | Shield   | Rainbow | 5-Star   | Spins in place. Gives a temporary shield.   |
-| 
+| Boost    |         |          | Temporary speed incease.                    |
+| MultiShot |        |          | Next shot fires multiple projectiles in all directions. |
+| Mind Control |     |          | Next shot will convert enemy.               |
 
 ## Weapons
 
