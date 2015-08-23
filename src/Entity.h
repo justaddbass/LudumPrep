@@ -15,11 +15,11 @@ public:
     virtual ~Entity() {}
 
     virtual inline const glm::mat4 getModelMatrix() const {return model_matrix;}
-    virtual void update(float deltaTime);
-    virtual void translate(float x, float y);
-    virtual void rotate(float angle);
-    virtual void setVelocity(float vel_x, float vel_y, float ang_vel);
-    virtual void render();
+    virtual void update(float deltaTime) = 0;
+    virtual void translate(float x, float y) = 0;
+    virtual void rotate(float angle) = 0;
+    virtual void setVelocity(float vel_x, float vel_y, float ang_vel) = 0;
+    virtual void render() = 0;
     virtual inline const float getVelX() const {return _vel_x;}
     virtual inline const float getVelY() const {return _vel_y;}
     virtual inline const float getAngVel() const {return _ang_vel;}
