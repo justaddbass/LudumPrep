@@ -5,6 +5,7 @@
 #include "Window.h"
 #include "Entity.h"
 #include "Enemy.h"
+#include "Text2d.h"
 
 Window* w;
 Renderer* r;
@@ -18,6 +19,7 @@ int width, height;
 float x = 0.0, y = 0.0;
 InvaderEnemy* ent1;
 InvaderEnemy* ent2;
+Text2d txt;
 
 void GameStart() {
     isRunning = true;
