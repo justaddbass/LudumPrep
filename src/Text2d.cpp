@@ -8,9 +8,10 @@ Text2d::Text2d(float x, float y, int size) {
 
 void Text2d::setText(const char* format, ...) {
     va_list args;
+    str = new char[strlen(format)];
 
     va_start(args, format);
-    vsnprintf(str, 128, format, args);
+    vsnprintf(str, strlen(format), format, args);
     va_end(args);
 
     for(unsigned int i = 0; i < strlen(str); ++i) {

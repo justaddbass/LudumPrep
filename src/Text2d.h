@@ -19,7 +19,7 @@ private:
     std::vector<glm::vec2> UVs;
     float _x, _y;
     int _size;
-    char str[128];
+    char* str;
 };
 
 #endif
