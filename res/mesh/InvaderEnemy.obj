@@ -1,0 +1,9 @@
+# Custom OBJ file (modified Blender OBJ for 2D)
+v -0.1 0.1
+v -0.1 -0.1
+v 0.1 0.1
+v 0.1 -0.1
+l 1/2
+l 2/3
+l 3/4
+l 4/1

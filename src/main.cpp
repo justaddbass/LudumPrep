@@ -17,7 +17,7 @@ int width, height;
 
 float x = 0.0, y = 0.0;
 InvaderEnemy* ent1;
-InvaderEnemy* ent2;
+WandererEnemy* ent2;
 
 void GameStart() {
     isRunning = true;
@@ -77,7 +77,7 @@ int main(int, char**) {
     r = new Renderer(width, height);
 
     ent1 = new InvaderEnemy();
-    ent2 = new InvaderEnemy();
+    ent2 = new WandererEnemy();
     r->registerEntity(ent1);
     r->registerEntity(ent2);
     r->attachEntity(ent1);
