@@ -6,6 +6,7 @@
 #include "Entity.h"
 #include "Enemy.h"
 #include "Text2d.h"
+#include "Shader.h"
 
 Window* w;
 Renderer* r;
@@ -15,11 +16,13 @@ double deltaTime, currentTime, lastTime;
 const double FPS = 1.0/60.0;
 const Uint8* keyState;
 int width, height;
+Shader* textShader;
+Shader* textureShader;
 
 float x = 0.0, y = 0.0;
 InvaderEnemy* ent1;
 InvaderEnemy* ent2;
-Text2d txt;
+Text2d* txt;
 
 void GameStart() {
     isRunning = true;
@@ -57,12 +60,17 @@ void GameStart() {
 
         // Update entity positions, do physics, etc here
         ent1->update(deltaTime);
+        txt->setText("hello");
 
         glClearColor(0.1, 0.1, 0.1, 1.0);
         w->ClearScreen();
 
         //rendering here
+        r->setShader(textureShader);
         r->render();
+        r->setShader(textShader);
+        txt->render();
+
 
         w->SwapBuffers();
 
@@ -77,6 +85,13 @@ int main(int, char**) {
     height = 512;
     w = new Window("Geometry", width, height);
     r = new Renderer(width, height);
+    txt = new Text2d(0.1, 0.1, 5);
+
+    textureShader = new Shader("res/vshader.vs", "res/fshader.fs");
+    textureShader->registerUniform("VM");
+
+    textShader = new Shader("res/text2d.vs", "res/text2d.fs");
+    textShader->registerUniform("texSampler");
 
     ent1 = new InvaderEnemy();
     ent2 = new InvaderEnemy();

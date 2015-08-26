@@ -2,10 +2,7 @@
 #include <stdio.h>
 
 Renderer::Renderer(int w, int h) {
-    textureShader = new Shader("res/vshader.vs", "res/fshader.fs");
-    setShader(textureShader);
-
-    textureShader->registerUniform("VM");
+    //textureShader->registerUniform("VM");
 
     width = w;
     height = h;
@@ -18,7 +15,10 @@ void Renderer::render() {
         updateViewMatrix();
         model_matrix = (*i)->getModelMatrix();
         view_model_matrix = view_matrix * model_matrix;
-        textureShader->setUniformMatrix4fv("MV", &view_model_matrix[0][0]);
+
+        //sets uniforms for both shaders, definitely better way to do this
+        currentShader->setUniformMatrix4fv("VM", &view_model_matrix[0][0]);
+        currentShader->setUniform1i("texSampler", 0);
         (*i)->render();
     }
 }

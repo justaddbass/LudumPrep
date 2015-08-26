@@ -1,6 +1,11 @@
 #ifndef TEXT2D_H
 #define TEXT2D_H
 
+#ifdef __APPLE__
+    #include <OpenGL/gl3.h>
+#else
+    #include <GL/glew.h>
+#endif
 #include <stdio.h>
 #include <stdarg.h>
 #include <cstring>
@@ -15,6 +20,7 @@ public:
     void setText(const char* format, ...);
     void render();
 private:
+    GLuint vao, vertex_buffer, uv_buffer, texture;
     std::vector<glm::vec2> vertices;
     std::vector<glm::vec2> UVs;
     float _x, _y;
